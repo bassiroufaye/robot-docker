@@ -33,7 +33,7 @@ ENV ALPINE_GLIBC 2.35-r0
 ENV AWS_CLI_VERSION 1.25.81
 ENV AXE_SELENIUM_LIBRARY_VERSION 2.1.6
 ENV BROWSER_LIBRARY_VERSION 14.0.0
-ENV CHROMIUM_VERSION 103.0
+ENV CHROMIUM_VERSION 109.0
 ENV DATABASE_LIBRARY_VERSION 1.2.4
 ENV DATADRIVER_VERSION 1.6.0
 ENV DATETIMETZ_VERSION 1.0.6
@@ -55,14 +55,13 @@ ENV AWS_UPLOAD_TO_S3 false
 # Prepare binaries to be executed
 COPY bin/chromedriver.sh /opt/robotframework/bin/chromedriver
 COPY bin/chromium-browser.sh /opt/robotframework/bin/chromium-browser
-COPY bin/run-tests-in-virtual-screen.sh /opt/robotframework/bin/
+#COPY bin/run-tests-in-virtual-screen.sh /opt/robotframework/bin/
 
 # Install system dependencies
 RUN dnf upgrade -y --refresh \
   && dnf install -y \
     chromedriver-${CHROMIUM_VERSION}* \
     chromium-${CHROMIUM_VERSION}* \
-    firefox-${FIREFOX_VERSION}* \
     npm \
     nodejs \
     python3-pip \
@@ -138,4 +137,4 @@ USER ${ROBOT_UID}:${ROBOT_GID}
 WORKDIR ${ROBOT_WORK_DIR}
 
 # Execute all robot tests
-CMD ["run-tests-in-virtual-screen.sh"]
+#CMD ["run-tests-in-virtual-screen.sh"]
